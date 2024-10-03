@@ -5,7 +5,7 @@ const create = async () => {
     const folderPath = path.join(import.meta.dirname, 'files');
     const filePath = path.join(folderPath, 'fresh.txt');
     const content = 'I am fresh and young';
-    
+
     try {
         await fs.access(filePath);
         throw new Error ('FS operation failed');
