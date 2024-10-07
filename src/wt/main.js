@@ -1,10 +1,12 @@
 import { Worker } from 'node:worker_threads';
 import os from 'node:os';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const performCalculations = async () => {
+    const __dirname = path.dirname(fileURLToPath(import.meta.url));
     const numberOfHostMachine = os.cpus().length;
-    const filePath = path.join(import.meta.dirname, 'worker.js');
+    const filePath = path.join(__dirname, 'worker.js');
     const workers = [];
     for (let i = 0; i < numberOfHostMachine; i++) {
         const worker = new Worker(filePath, {

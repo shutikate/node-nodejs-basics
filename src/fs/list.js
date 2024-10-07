@@ -1,8 +1,10 @@
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { readdir } from 'node:fs/promises';
 
 const list = async () => {
-    const folderPath = path.join(import.meta.dirname, 'files');
+    const __dirname = path.dirname(fileURLToPath(import.meta.url));
+    const folderPath = path.join(__dirname, 'files');
     try {
         const folderContent = await readdir(folderPath);
         console.log(folderContent);

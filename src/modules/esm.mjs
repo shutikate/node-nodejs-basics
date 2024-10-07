@@ -1,10 +1,12 @@
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { release, version } from 'node:os';
 import { createServer as createServerHttp } from 'node:http';
 import { readFile } from 'node:fs/promises';
 import './files/c.js';
 
-const pathToFolderFiles = path.join(import.meta.dirname, 'files');
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const pathToFolderFiles = path.join(__dirname, 'files');
 
 const readJson = async (file) => {
     try {
@@ -33,8 +35,8 @@ console.log(`Release ${release()}`);
 console.log(`Version ${version()}`);
 console.log(`Path segment separator is "${path.sep}"`);
 
-console.log(`Path to current file is ${import.meta.filename}`);
-console.log(`Path to current directory is ${import.meta.dirname}`);
+console.log(`Path to current file is ${fileURLToPath(import.meta.url)}`);
+console.log(`Path to current directory is ${__dirname}`);
 
 export const myServer = createServerHttp((_, res) => {
     res.end('Request accepted');

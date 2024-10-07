@@ -1,10 +1,12 @@
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { pipeline } from 'node:stream';
 import { createReadStream, createWriteStream } from 'node:fs';
 import { createGzip } from 'node:zlib';
 
 const compress = async () => {
-    const folderPath = path.join(import.meta.dirname, 'files');
+    const __dirname = path.dirname(fileURLToPath(import.meta.url));
+    const folderPath = path.join(__dirname, 'files');
     const filePath = path.join(folderPath, 'fileToCompress.txt');
     pipeline (
         createReadStream(filePath),

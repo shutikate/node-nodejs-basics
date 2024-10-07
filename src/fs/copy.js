@@ -1,9 +1,11 @@
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { access, mkdir, cp } from 'node:fs/promises';
 
 const copy = async () => {
-    const folderPath = path.join(import.meta.dirname, 'files');
-    const folderCopyPath = path.join(import.meta.dirname, 'files_copy');
+    const __dirname = path.dirname(fileURLToPath(import.meta.url));
+    const folderPath = path.join(__dirname, 'files');
+    const folderCopyPath = path.join(__dirname, 'files_copy');
     try {
         await access(folderPath);
         await mkdir(folderCopyPath);

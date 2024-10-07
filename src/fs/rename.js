@@ -1,8 +1,10 @@
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { rename as renameFile } from 'node:fs/promises';
 
 const rename = async () => {
-    const folderPath = path.join(import.meta.dirname, 'files');
+    const __dirname = path.dirname(fileURLToPath(import.meta.url));
+    const folderPath = path.join(__dirname, 'files');
     try {
         await renameFile(path.join(folderPath, 'wrongFilename.txt'), path.join(folderPath, 'properFilename.md'));
     }
